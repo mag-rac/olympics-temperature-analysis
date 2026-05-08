@@ -80,7 +80,7 @@ Model danych oparto na strukturze **gwiazdy (star schema)**:
 > W słowniku uwzględniono grupę **”AIN”**(neutralni sportowcy), ponieważ zdobyli oni medal, ale jako, że nie reprezentują oni konkretnego terytorium, przypisano im wartość `BLANK` w kontekście temperatury.
 
 ## Wyniki i wnioski
-* **Liderzy**: Norwegia, nie mająca najniższej temperatury (2.2°C), pozostaje liderem klasyfikacji z największą liczbą medali.
+* **Liderzy**: Norwegia, niemająca najniższej temperatury (2.2°C), pozostaje liderem klasyfikacji z największą liczbą medali.
 * **Dominacja Norwegii**: Norwegia dominuje nad sąsiadami (Finlandia, Szwecja) o zbliżonym klimacie. Kraje te osiągają znacznie mniej medali. To sugeruje, że za sukcesem może stać system szkolenia lub dostępna infrastruktura sportowa.
 * **Najniższa temperatura**: Kanada jako najzimniejszy kraj nie zdobywa najwięcej medali. Zimno nie gwarantuje sukcesu. W tym przypadku ważniejsza może być populacja.
 * **Wyjątkowa korelacja**: Włochy, w których odbyły się igrzyska olimpijskie oraz Australia, mimo wyższej średniej temperatury, zdobywają więcej medali, niż niektóre zimniejsze kraje (np. Estonia, Łotwa).
