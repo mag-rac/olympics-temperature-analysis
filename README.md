@@ -38,11 +38,14 @@ Proces ETL został wykonany w Power Query i obejmował:
 ## Wykorzystane miary DAX
 * **Suma medali**:
 
-```Wszystkie medale = SUM(fact_medale[Razem])```
+```
+Wszystkie medale = SUM(fact_medale[Razem])
+```
 
 * **Średnia temperatura**:
 
-```Średnia temperatura KPI =
+```
+Średnia temperatura KPI =
 VAR Country =
     COALESCE(SELECTEDVALUE(dim_kraje[Kraj]), "Norwegia")
 VAR Temperatura =
@@ -53,11 +56,13 @@ RETRUN
     IF(
         Country = "AIN (Neutralni)",
         Country & " – ",
-        Country & "  " & FORMAT(Temperatura, "0.0") & "°C")```
+        Country & "  " & FORMAT(Temperatura, "0.0") & "°C")
+```
 
 * **Liczba medali**:
 
-```Liczba medali KPI = 
+```
+Liczba medali KPI = 
 VAR Country = 
     COALESCE(SELECTEDVALUE(dim_kraje[Kraj]), "Norwegia")
 VAR Medals =
@@ -65,7 +70,8 @@ VAR Medals =
         [Wszystkie medale], 
         dim_kraje[Kraj] = Country)
 RETURN
-    Country & "  " & Medals```
+    Country & "  " & Medals
+```
 
 ## Modelowanie danych
 Model danych oparto na strukturze **gwiazdy (star schema)**:
