@@ -1,4 +1,4 @@
-# Analiza wpływu temperatury na ilość zdobytych medali w Zimowych Igrzyskach Olimpijskich 2026
+# Analiza wpływu temperatury na liczbę zdobytych medali w Zimowych Igrzyskach Olimpijskich 2026
 
 ## Spis treści
 * [O projekcie](#o-projekcie)
@@ -38,37 +38,34 @@ Proces ETL został wykonany w Power Query i obejmował:
 ## Wykorzystane miary DAX
 * **Suma medali**:
 
-Wszystkie medale = SUM(fact_medale[Razem])
+```Wszystkie medale = SUM(fact_medale[Razem])```
 
 * **Średnia temperatura**:
 
-Średnia temperatura KPI = 
+```Średnia temperatura KPI =
 VAR Country =
-    COALESCE(SELECTEDVALUE(dim_kraje[Kraj]), "Norwegia")
-VAR Temp =
-    CALCULATE(
-        AVERAGE(fact_temperatura[Temperatura]),
-        dim_kraje[Kraj] = Country
-    )
-RETURN
-    IF(
-        Country = "AIN (Neutralni)",
-        Country & " – ",
-        Country & "  " & FORMAT(Temp, "0.0") & "°C"
-    )
+    COALESCE(SELECTEDVALUE(dim_kraje[Kraj]), "Norwegia")
+VAR Temperatura =
+    CALCULATE(
+        AVERAGE(fact_temperatura[Temperatura]),
+        dim_kraje[Kraj] = Country)
+RETRUN
+    IF(
+        Country = "AIN (Neutralni)",
+        Country & " – ",
+        Country & "  " & FORMAT(Temperatura, "0.0") & "°C")```
 
-* **Ilość medali**:
+* **Liczba medali**:
 
-Liczba medali KPI = 
-VAR Country =
-    COALESCE(SELECTEDVALUE(dim_kraje[Kraj]), "Norwegia")
+```Liczba medali KPI = 
+VAR Country = 
+    COALESCE(SELECTEDVALUE(dim_kraje[Kraj]), "Norwegia")
 VAR Medals =
-    CALCULATE(
-        [Wszystkie medale],
-        dim_kraje[Kraj] = Country
-    )
+    CALCULATE(
+        [Wszystkie medale], 
+        dim_kraje[Kraj] = Country)
 RETURN
-    Country & "  " & Medals
+    Country & "  " & Medals```
 
 ## Modelowanie danych
 Model danych oparto na strukturze **gwiazdy (star schema)**:
@@ -76,8 +73,8 @@ Model danych oparto na strukturze **gwiazdy (star schema)**:
 * **Tabele faktów**: `fact_medale` oraz `fact_temperatura`.
 * **Relacje**: Jeden-do-wielu (1:*) z jednokierunkowym filtrowaniem od tabeli wymiarów do tabeli faktów.
 
->[!NOTE]
-> W słowniku uwzględniono grupę **”AIN”**(neutralni sportowcy), ponieważ zdobyli oni medal, ale jako, że nie reprezentują oni konkretnego terytorium, przypisano im wartość `BLANK` w kontekście temperatury.
+>[!Notatka]
+> W słowniku uwzględniono grupę **”AIN”**(neutralni sportowcy), ponieważ zdobyli oni medal, ale jako, że nie reprezentują oni konkretnego terytorium, przypisano im znak `–` w kontekście temperatury.
 
 ## Wyniki i wnioski
 * **Liderzy**: Norwegia, niemająca najniższej temperatury (2.2°C), pozostaje liderem klasyfikacji z największą liczbą medali.
@@ -91,5 +88,5 @@ Model danych oparto na strukturze **gwiazdy (star schema)**:
 * **Brak danych historycznych**: Analiza opiera się na bieżącej klasyfikacji medalowej (2026).
 * **Czynniki ekonomiczne**: Analiza nie uwzględnia PKB ani ilości infrastruktury sportowej, które z pewnością mają wpływ na wyniki olimpijskie.
 
-## Autor
+## Autorka
 * Magdalena Rachoń – [GitHub](github.com/mag-rac)
